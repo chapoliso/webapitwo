@@ -34,6 +34,7 @@ app.get('/usuario/todos', (req, res) => {
 
 app.get('/usuario/cidade/:cidade', (req, res) => {
     const cidadeParam = req.params.cidade.toLowerCase();
+    console.log(`Filtrando usuários da cidade: ${cidadeParam}`);
     const filtrados = usuarios.filter(usuarios => usuarios.cidade.toLowerCase() === cidadeParam);
     res.json(filtrados);
 });
