@@ -14,7 +14,7 @@ const usuarios = [
     { nome: 'Duda', cidade: 'Caririmirim' },
     { nome: 'Junior', cidade: 'Caririmirim' },
     { nome: 'Igor', cidade: 'Caririmirim' }
-];
+]; 
 
 app.use(express.json());
 
