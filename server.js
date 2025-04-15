@@ -1,7 +1,8 @@
 import express from 'express';
+import serverless from 'serverless-http';
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const usuarios = [
     { nome: 'Ana Clara', cidade: 'Crato' },
@@ -14,7 +15,7 @@ const usuarios = [
     { nome: 'Duda', cidade: 'Caririmirim' },
     { nome: 'Junior', cidade: 'Caririmirim' },
     { nome: 'Igor', cidade: 'Caririmirim' }
-]; 
+];
 
 app.use(express.json());
 
@@ -53,8 +54,12 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Rota não encontrada' });
 });
 
-app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
-});
+// Start the server in development mode
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(port, () => {
+        console.log(`Servidor rodando em http://localhost:${port}`);
+    });
+}
 
-export default app;
+// Export the Express app wrapped in serverless-http
+export const handler = serverless(app);
